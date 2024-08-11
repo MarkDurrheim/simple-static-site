@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-static-site-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-static-site
+  template:
+    metadata:
+      labels:
+        app: simple-static-site
+    spec:
+      containers:
+      - name: local-simple-static-site-container
+        image: simple-static-site:1.0.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-static-site-service
+spec:
+  selector:
+    app: simple-static-site
+  ports:
+  - protocol: TCP
+    port: 80
+  type: NodePort
