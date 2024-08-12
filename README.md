@@ -15,7 +15,7 @@ docker run --name=simple-static-site -P simple-static-site:1.0.0
 
 Open in browser
 ```shell
-docker container port simple-static-site 80 | Select-String -Pattern ':\d+' |  ForEach-Object { Start-Process "http://localhost$($_.Matches.Value)" }
+docker container port simple-static-site 8080 | Select-String -Pattern ':\d+' |  ForEach-Object { Start-Process "http://localhost$($_.Matches.Value)" }
 ```
 
 ## Kubernetes
@@ -27,7 +27,7 @@ kubectl apply -f .\deploy-simple-static-site.yaml
 
 Enable port-forwarding for the service at http://localhost:9082
 ```shell
-kubectl port-forward service/simple-static-site-service 9082:80
+kubectl port-forward service/simple-static-site-service 9082:8080
 ```
 
 Minikube can port-forward and open with the command
