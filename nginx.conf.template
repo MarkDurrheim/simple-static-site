@@ -1,0 +1,12 @@
+server {
+    listen 8080;
+    server_name localhost;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location / {
+        sub_filter_once off;
+        sub_filter 'DEV_NAME' '$DEV_NAME';
+    }
+}
