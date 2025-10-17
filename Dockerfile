@@ -2,4 +2,12 @@
 # Use the nginx-unprivileged image as a base to reduce issues in environments like OpenShift
 # Serves through port 8080
 FROM nginxinc/nginx-unprivileged
+
+# Copy static files
 COPY static /usr/share/nginx/html
+
+# Copy nginx config template
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+
+# Set Default Environment Variable
+ENV DEV_NAME="Some Developer"

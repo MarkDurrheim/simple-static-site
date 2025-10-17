@@ -10,7 +10,7 @@ docker build -t simple-static-site:1.0.0 .
 
 Run in Docker
 ```shell
-docker run --name=simple-static-site -P simple-static-site:1.0.0
+docker run --name=simple-static-site -e DEV_NAME="YOUR NAME" -p 9082:8080 simple-static-site:1.0.0
 ```
 
 Open in browser
