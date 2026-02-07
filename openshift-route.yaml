@@ -1,0 +1,13 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: simple-static-site-route
+spec:
+  to:
+    kind: Service
+    name: simple-static-site-service
+  port:
+    targetPort: http-8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
