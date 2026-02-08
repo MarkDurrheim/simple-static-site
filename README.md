@@ -5,24 +5,28 @@ A simple two-page static site served with nginx.
 ## Docker
 Build the image
 ```shell
-docker build -t simple-static-site:1.0.0 .
+docker build -t simple-static-site:1.1 .
 ```
 
 Run in Docker
 ```shell
-docker run --name=simple-static-site -e DEV_NAME="YOUR NAME" -p 9082:8080 simple-static-site:1.0.0
+docker run --name=simple-static-site -e DEV_NAME="YOUR NAME" -p 9082:8080 simple-static-site:1.1
 ```
 
-Open in browser
+Open in browser (PowerShell)
 ```shell
-docker container port simple-static-site 8080 | Select-String -Pattern ':\d+' |  ForEach-Object { Start-Process "http://localhost$($_.Matches.Value)" }
+start http://localhost:9082
 ```
 
 ## Kubernetes
 
 Apply configuration to create a deployment and service to expose it
 ```shell
-kubectl apply -f .\deploy-simple-static-site.yaml
+kubectl apply -f .\deploy.yaml
+
+# OR for OpenShift
+
+oc apply -f .\deploy.yaml -f .\openshift-route.yaml
 ```
 
 Enable port-forwarding for the service at http://localhost:9082

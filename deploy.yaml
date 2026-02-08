@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: simple-static-site
 spec:
-  replicas: 1
+  # replicas: 5 # Uncomment to scale up to 5 replicas
   selector:
     matchLabels:
       app: simple-static-site-app
@@ -14,15 +14,33 @@ spec:
     spec:
       containers:
       - name: simple-static-site
-        image: simple-static-site:1.0.0
+        image: durrheimmark/simple-static-site:1.1
+        env:
+        - name: DEV_NAME
+          value: "YOUR NAME HERE"
         ports:
         - name: http
           containerPort: 8080
           protocol: TCP
-          resources:
-            requests:
-              memory: "50Mi"
-              cpu: "10m"
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "10m"
+          limits:
+            memory: "100Mi"
+            cpu: "50m"
+        livenessProbe:
+          httpGet:
+            path: "/health"
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: "/health"
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
 ---
 kind: Service
 apiVersion: v1
