@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: simple-static-site
 spec:
-  replicas: 5
+  # replicas: 5 # Uncomment to scale up to 5 replicas
   selector:
     matchLabels:
       app: simple-static-site-app
@@ -33,13 +33,13 @@ spec:
           httpGet:
             path: "/health"
             port: 8080
-          initialDelaySeconds: 10
+          initialDelaySeconds: 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: "/health"
             port: 8080
-          initialDelaySeconds: 10
+          initialDelaySeconds: 5
           periodSeconds: 5
 ---
 kind: Service
