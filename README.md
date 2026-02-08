@@ -2,6 +2,12 @@
 
 A simple two-page static site served with nginx.
 
+Display your name by setting the `DEV_NAME` environment variable.
+
+Preview of the site with no dev set: https://markdurrheim.github.io/simple-static-site/
+
+Pre-built Docker image: https://hub.docker.com/r/durrheimmark/simple-static-site
+
 ## Docker
 Build the image
 ```shell
